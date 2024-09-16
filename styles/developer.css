@@ -59,8 +59,7 @@
 /* header styles */
 
 .header {
-  background-image: url("../images/developer.png"),
-    url("../images/header_bg.png");
+  background-image: url("../images/developer.png"), url("../images/header_bg.png");
   background-repeat: no-repeat;
   background-position: center left, bottom right;
   margin: 0 0;
@@ -244,6 +243,14 @@ footer {
 footer .links {
   display: flex;
   gap: 20px;
+}
+footer .links > a {
+  transition: all ease-in-out 300ms;
+}
+
+footer .links > a:hover {
+  scale: 1.5;
+  transition: scale ease-in-out 300ms;
 }
 
 footer input[type="text"],
