@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Temperature Carbon Capture: Materials for 850°C+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+            color: #073B4C;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+    
+    <!-- 
+    Color Palette Chosen: "Energetic & Playful" (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C) 
+    -->
+
+    <!--
+    Infographic Narrative Plan:
+    1. Title & Hook: What is high-temperature carbon capture and why is 850°C+ a key figure? (It's for regeneration in industrial processes).
+    2. The Process (Calcium Looping): Explain the two-step Carbonation/Calcination cycle. This establishes the context for the material.
+    3. The Challenge: Introduce the problem - natural limestone (CaO) degrades quickly over cycles. Show this with a line chart.
+    4. The Solution (Advanced Materials): Introduce synthetic/doped sorbents as the innovation. Compare them to natural limestone.
+    5. Key Performance Comparison: Use charts to compare key metrics: cyclic stability (line chart), capture capacity (bar chart), and material composition (donut chart).
+    6. Applications: Where is this used? (Cement, Steel). Use simple HTML cards.
+    7. Conclusion/Future Outlook: Summarize the importance of these advanced materials.
+    -->
+
+    <!--
+    Visualization Plan:
+    1. (Section 2) Calcium Looping Process:
+       Goal: Organize (Show a process).
+       Chosen Visualization: Flow Chart.
+       Justification/Method: A simple two-box diagram (Carbonator, Calciner) with arrows. Will be implemented using structured HTML/CSS (Tailwind flexbox, borders, and text). NO SVG or Mermaid JS used.
+    2. (Section 3) The Challenge - Natural Sorbent Degradation:
+       Goal: Change (Show change over time).
+       Chosen Visualization: Line Chart.
+       Justification/Method: Perfectly shows the rapid drop in CO₂ capture capacity over 30+ cycles. Implemented with Chart.js (Canvas). NO SVG used. Will include mandatory tooltip config.
+    3. (Section 4) Solution - Sorbent Composition:
+       Goal: Inform (Show composition).
+       Chosen Visualization: Donut Chart.
+       Justification/Method: Shows the typical makeup of a synthetic sorbent (e.g., 80% CaO, 20% Stabilizer). Implemented with Chart.js (Canvas). NO SVG used. Will include mandatory tooltip config.
+    4. (Section 5) Performance - Cyclic Stability Comparison:
+       Goal: Compare (and Show Change).
+       Chosen Visualization: Multi-Line Chart.
+       Justification/Method: Directly compares 'Natural Limestone' vs. 'Synthetic Sorbent' over 50+ cycles. This is the core data story. Implemented with Chart.js (Canvas). NO SVG used. Will include mandatory tooltip config.
+    5. (Section 5) Performance - Max Capture Capacity:
+       Goal: Compare (Categories).
+       Chosen Visualization: Bar Chart.
+       Justification/Method: Simple comparison of max theoretical capacity (g-CO₂/g-sorbent) for different material types (Limestone, Doped CaO, etc.). Implemented with Chart.js (Canvas). NO SVG used. Will use label wrapping for long labels.
+    -->
+    
+    <!-- 
+    Infographic SPA successfully generated. 
+    Explicitly confirmed that NEITHER Mermaid JS NOR SVG were used in this file. 
+    All diagrams are built with HTML/Tailwind and charts are rendered via Chart.js on Canvas. 
+    -->
+</head>
+<body class="bg-gray-50 text-[#073B4C]">
+
+    <header class="bg-[#073B4C] text-white p-6 md:p-8 shadow-xl top-0 z-50">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold">The 850°C Challenge: Advanced Materials for Carbon Capture</h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-1">Visualizing the science of high-temperature sorbents</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8 mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+            <section class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8 border-t-4 border-[#118AB2]">
+                <p class="text-lg leading-relaxed mb-6">To decarbonize heavy industries like cement and steel, we must capture CO₂ from high-temperature processes. This requires materials that can operate in a demanding cycle, particularly during regeneration at <strong>850°C to 950°C</strong>. This infographic explores the materials at the heart of this technology.</p>
+                <div class="flex flex-col md:flex-row justify-around items-center text-center p-4 bg-gray-50 rounded-lg">
+                    <div class="p-4">
+                        <p class="text-5xl md:text-6xl font-bold text-[#118AB2]">850°C+</p>
+                        <p class="text-lg font-semibold mt-2">Sorbent Regeneration Temp</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-5xl md:text-6xl font-bold text-[#06D6A0]">90%+</p>
+                        <p class="text-lg font-semibold mt-2">Target CO₂ Capture Rate</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-5xl md:text-6xl font-bold text-[#FF6B6B]">~15%</p>
+                        <p class="text-lg font-semibold mt-2">Industrial CO₂ Emissions</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold mb-4 text-[#073B4C]">The Process: Calcium Looping (CaL) Cycle</h2>
+                <p class="text-lg leading-relaxed mb-6">The leading high-temperature method is the Calcium Looping (CaL) cycle. This process uses a solid sorbent, typically Calcium Oxide (CaO), to capture CO₂ in one reactor and release it in a pure stream from another. The 850°C+ temperature occurs in the regeneration step.</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 p-4 rounded-lg bg-gray-50">
+                    <div class="bg-blue-50 border-2 border-[#118AB2] rounded-lg p-6 shadow-md text-center w-full md:w-72">
+                        <h3 class="text-2xl font-semibold text-[#073B4C] mb-2">1. Carbonator</h3>
+                        <p class="text-3xl font-bold text-[#118AB2]">~700°C</p>
+                        <p class="mt-3 text-lg font-mono bg-white p-2 rounded">CaO + CO₂ → CaCO₃</p>
+                        <p class="text-md mt-3">Sorbent captures CO₂ from industrial flue gas.</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-3xl font-bold text-[#073B4C] p-2">
+                        <span class="mb-2 text-lg text-center">Solid CaCO₃<br>→</span>
+                        <span class="mt-2 text-lg text-center">←<br>Regenerated CaO</span>
+                    </div>
+
+                    <div class="bg-red-50 border-2 border-[#FF6B6B] rounded-lg p-6 shadow-md text-center w-full md:w-72">
+                        <h3 class="text-2xl font-semibold text-[#073B4C] mb-2">2. Calciner</h3>
+                        <p class="text-3xl font-bold text-[#FF6B6B]">~900°C</p>
+                        <p class="mt-3 text-lg font-mono bg-white p-2 rounded">CaCO₃ → CaO + CO₂</p>
+                        <p class="text-md mt-3">Releases pure CO₂ for storage & regenerates sorbent.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold mb-4 text-[#073B4C]">The Challenge: Material Degradation</h2>
+                <p class="text-lg leading-relaxed mb-6">Natural materials like limestone (which becomes CaO) are cheap but not durable. The extreme heat of regeneration causes them to 'sinter'—their pores collapse, and they rapidly lose the ability to capture CO₂.</p>
+                <div class="chart-container">
+                    <canvas id="degradationChart"></canvas>
+                </div>
+                <p class="text-md text-center mt-4 italic">As shown, the capture capacity of natural limestone plummets after just a few cycles, making the process inefficient.</p>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold mb-4 text-[#073B4C]">The Solution: Synthetic Sorbents</h2>
+                <p class="text-lg leading-relaxed mb-6">The solution is to engineer advanced sorbents. By 'doping' Calcium Oxide with a stable, heat-resistant material (like alumina or zirconia), a porous 'skeleton' is created that prevents sintering.</p>
+                <div class="chart-container" style="max-height: 300px; height: 250px;">
+                    <canvas id="compositionChart"></canvas>
+                </div>
+                <p class="text-md text-center mt-4 italic">These advanced sorbents maintain their structure and performance, even after hundreds of cycles.</p>
+            </section>
+
+            <section class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold mb-4 text-center text-[#073B4C]">Performance Comparison: Natural vs. Synthetic</h2>
+                <p class="text-lg leading-relaxed mb-6 text-center max-w-4xl mx-auto">The difference in performance is stark. Advanced, doped sorbents vastly outperform natural limestone in the two most critical metrics: long-term stability and overall capture capacity.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4">Long-Term Cyclic Stability</h3>
+                        <div class="chart-container">
+                            <canvas id="stabilityChart"></canvas>
+                        </div>
+                        <p class="text-md text-center mt-4 italic">The synthetic sorbent maintains a high, stable capture capacity, while the natural limestone's capacity collapses.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4">Effective Capture Capacity</h3>
+                        <div class="chart-container">
+                            <canvas id="capacityChart"></canvas>
+                        </div>
+                        <p class="text-md text-center mt-4 italic">While natural limestone starts high, its stable, usable capacity is very low. Doped sorbents are engineered for durability.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold mb-6 text-center text-[#073B4C]">Key Industrial Applications</h2>
+                <p class="text-lg leading-relaxed mb-8 text-center max-w-4xl mx-auto">These robust materials are essential for decarbonizing "hard-to-abate" sectors where high-temperature heat is unavoidable and process emissions (not just energy) are a core problem.</p>
+                
+                <div class="flex flex-wrap justify-center gap-6 p-4">
+                    <div class="bg-gray-100 rounded-lg shadow-inner p-6 w-full sm:w-72 text-center transition-transform transform hover:scale-105">
+                        <div class="text-6xl mb-4">🏭</div>
+                        <h4 class="text-2xl font-semibold text-[#073B4C]">Cement Production</h4>
+                        <p class="text-md mt-2">Capturing CO₂ released directly from the chemical conversion of limestone (calcination), a primary source of emissions.</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg shadow-inner p-6 w-full sm:w-72 text-center transition-transform transform hover:scale-105">
+                        <div class="text-6xl mb-4">🔥</div>
+                        <h4 class="text-2xl font-semibold text-[#073B4C]">Steel Manufacturing</h4>
+                        <p class="text-md mt-2">Integrating with blast furnaces to capture CO₂ from combustion and the iron ore reduction process.</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg shadow-inner p-6 w-full sm:w-72 text-center transition-transform transform hover:scale-105">
+                        <div class="text-6xl mb-4">⚡</div>
+                        <h4 class="text-2xl font-semibold text-[#073B4C]">Power & Hydrogen</h4>
+                        <p class="text-md mt-2">Retrofitting power plants or enabling blue hydrogen production by capturing CO₂ from steam methane reforming.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="text-center p-6 md:p-10 mt-8 text-gray-500 text-sm border-t border-gray-200">
+        <p>Infographic SPA generated based on public research into high-temperature solid sorbents for carbon capture.</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const colorPrimary = '#118AB2';
+            const colorSecondary = '#06D6A0';
+            const colorTertiary = '#FFD166';
+            const colorDanger = '#FF6B6B';
+            const colorText = '#073B4C';
+
+            Chart.defaults.color = colorText;
+            Chart.defaults.borderColor = 'rgba(7, 59, 76, 0.1)';
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.font.weight = '600';
+
+            const chartTooltipCallbacks = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            function wrapLabels(labels, maxWidth) {
+                return labels.map(label => {
+                    if (typeof label === 'string' && label.length > maxWidth) {
+                        const words = label.split(' ');
+                        let lines = [];
+                        let currentLine = '';
+                        for (const word of words) {
+                            if ((currentLine + word).length > (maxWidth + 1)) {
+                                lines.push(currentLine.trim());
+                                currentLine = word + ' ';
+                            } else {
+                                currentLine += word + ' ';
+                            }
+                        }
+                        lines.push(currentLine.trim());
+                        return lines;
+                    }
+                    return label;
+                });
+            }
+
+            if (document.getElementById('degradationChart')) {
+                const ctxDegradation = document.getElementById('degradationChart').getContext('2d');
+                new Chart(ctxDegradation, {
+                    type: 'line',
+                    data: {
+                        labels: ['Start', '5 Cycles', '10 Cycles', '15 Cycles', '20 Cycles', '25 Cycles', '30 Cycles'],
+                        datasets: [{
+                            label: 'Natural Limestone Capacity',
+                            data: [0.75, 0.4, 0.25, 0.18, 0.15, 0.14, 0.13],
+                            borderColor: colorDanger,
+                            backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'g-CO₂ / g-Sorbent'
+                                }
+                            }
+                        },
+                        ...chartTooltipCallbacks
+                    }
+                });
+            }
+
+            if (document.getElementById('compositionChart')) {
+                const ctxComposition = document.getElementById('compositionChart').getContext('2d');
+                new Chart(ctxComposition, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Calcium Oxide (Active)', 'Stabilizer (e.g., Al₂O₃)'],
+                        datasets: [{
+                            data: [80, 20],
+                            backgroundColor: [colorPrimary, colorSecondary],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        ...chartTooltipCallbacks
+                    }
+                });
+            }
+
+            if (document.getElementById('stabilityChart')) {
+                const ctxStability = document.getElementById('stabilityChart').getContext('2d');
+                new Chart(ctxStability, {
+                    type: 'line',
+                    data: {
+                        labels: ['Start', '10 Cycles', '20 Cycles', '30 Cycles', '40 Cycles', '50 Cycles'],
+                        datasets: [
+                            {
+                                label: 'Synthetic Doped Sorbent',
+                                data: [0.6, 0.58, 0.57, 0.55, 0.54, 0.53],
+                                borderColor: colorSecondary,
+                                backgroundColor: 'rgba(6, 214, 160, 0.1)',
+                                fill: false,
+                                tension: 0.1
+                            },
+                            {
+                                label: 'Natural Limestone',
+                                data: [0.75, 0.25, 0.15, 0.13, 0.12, 0.11],
+                                borderColor: colorDanger,
+                                backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                                fill: false,
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'g-CO₂ / g-Sorbent'
+                                }
+                            }
+                        },
+                        ...chartTooltipCallbacks
+                    }
+                });
+            }
+
+            if (document.getElementById('capacityChart')) {
+                const ctxCapacity = document.getElementById('capacityChart').getContext('2d');
+                const rawLabels = [
+                    'Natural Limestone (Initial)', 
+                    'Natural Limestone (After 20 Cycles)', 
+                    'Synthetic Doped Sorbent (Stable)'
+                ];
+                const wrappedLabels = wrapLabels(rawLabels, 16);
+
+                new Chart(ctxCapacity, {
+                    type: 'bar',
+                    data: {
+                        labels: wrappedLabels,
+                        datasets: [{
+                            label: 'g-CO₂ per g-Sorbent',
+                            data: [0.75, 0.15, 0.55],
+                            backgroundColor: [
+                                colorTertiary,
+                                colorDanger,
+                                colorSecondary
+                            ],
+                            borderColor: [
+                                '#E6B800',
+                                '#D94747',
+                                '#05A67C'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'g-CO₂ / g-Sorbent'
+                                }
+                            }
+                        },
+                        ...chartTooltipCallbacks
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>
